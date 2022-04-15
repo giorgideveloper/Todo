@@ -1,14 +1,15 @@
-import BasicAlerts from '../alert/Alert';
-import BasicSpeedDial from '../dial/Dial';
-import BasicExampleDataGrid from '../forms/Forms';
+import { Routes, Route, Link } from 'react-router-dom';
+import About from '../about/About';
 import './App.css';
 function App() {
 	return (
-		<div className='App'>
-			<BasicAlerts />
-			<BasicExampleDataGrid />
-			<BasicSpeedDial />
-		</div>
+		<>
+			<Link to='/'>Home</Link>
+			<Link to='/about'>About</Link>
+			<Routes>
+				<Route path='about' element={<About />} />
+			</Routes>
+		</>
 	);
 }
 
