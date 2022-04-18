@@ -15,7 +15,7 @@ function About() {
 	return (
 		<div>
 			{post.map(note => (
-				<div>
+				<div key={note.id}>
 					<h1>{note.title}</h1>
 					<p>{note.description}</p>
 				</div>
