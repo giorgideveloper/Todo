@@ -2,33 +2,48 @@ import React from 'react';
 import axios from 'axios';
 import Listitem from '../listitem/Listitem';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as ReactBootstrap from 'react-bootstrap';
+import './Cardlistitem.css';
 
 function Cardlistitem() {
 	const [post, setPost] = React.useState(null);
 	const [loading, setLoading] = React.useState(false);
 
-	React.useEffect(() => {
-		axios.get('https://keep.jrwebdeveloper.com/api/notes').then(response => {
-			setPost(response.data.data);
-			console.log(post);
+	const setPostfn = async () => {
+		try {
+			const data = await axios
+				.get('https://keep.jrwebdeveloper.com/api/notes')
+				.then(response => {
+					setPost(
+						response.data.data.map(note => (
+							<div
+								key={note.id}
+								className='col-lg-3 col-md-6 col-12 p-2 justify-content-center'
+							>
+								<Listitem key={note.id} note={note} />
+							</div>
+						))
+					);
+				});
 			setLoading(true);
-		});
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	React.useEffect(() => {
+		setPostfn();
 	}, []);
-	if (!post) return null;
 
 	return (
 		<>
-			<div className='container'>
-				<div className='row'>
-					<div className='col-md-3'>
-						{post.map(note => (
-							<div key={note.id}>
-								<Listitem key={note.id} note={note} />
-							</div>
-						))}
-					</div>
+			{loading ? (
+				post
+			) : (
+				<div className='spiner'>
+					<ReactBootstrap.Spinner animation='grow' className='spiners' />
 				</div>
-			</div>
+			)}
 		</>
 	);
 }

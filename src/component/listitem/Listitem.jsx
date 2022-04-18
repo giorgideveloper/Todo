@@ -8,18 +8,16 @@ import './Listitem.css';
 function Listitem(props) {
 	console.log(props.note.title);
 	return (
-		<Card sx={{ maxWidth: 345 }}>
+		<Card className='cards' sx={{ maxWidth: 345, maxHeight: 500 }}>
 			<CardActionArea>
 				<CardContent>
-					<div className='col-md-12'>
-						<Typography gutterBottom variant='h5' component='div'>
-							{props.note.title}
-						</Typography>
+					<Typography gutterBottom variant='h5' component='div'>
+						{props.note.title}
+					</Typography>
 
-						<Typography variant='body2' color='text.secondary'>
-							{props.note.description}
-						</Typography>
-					</div>
+					<Typography variant='body2' color='text.secondary'>
+						{props.note.description}
+					</Typography>
 				</CardContent>
 			</CardActionArea>
 		</Card>
