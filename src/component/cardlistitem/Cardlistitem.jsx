@@ -16,12 +16,11 @@ function Cardlistitem() {
 				.then(response => {
 					setPost(
 						response.data.data.map(note => (
-							<div
-								key={note.id}
-								className='col-lg-3 col-md-6 col-12 p-2 justify-content-center'
-							>
-								<Listitem key={note.id} note={note} />
-							</div>
+							<>
+								<div key={note.id} className='col-lg-3 col-md-6 col-12 p-2 '>
+									<Listitem key={note.id} note={note} />
+								</div>
+							</>
 						))
 					);
 				});
